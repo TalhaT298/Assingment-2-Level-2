@@ -11,9 +11,13 @@ app.use(cors());
 
 // applications routes 
 app.use('/api/products',ProductRoutes)
+app.use('/api/products',ProductRoutes)
 
+
+
+// testing server 
 app.get("/", (req: Request, res: Response) => {
-  const a = "Hello World!";
+  const a = "Hello World";
   res.send(a);
 });
 
