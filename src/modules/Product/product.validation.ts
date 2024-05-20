@@ -23,6 +23,7 @@ const ProductZodSchema = z.object({
   tags: z.array(z.string().min(1, "The tags field cannot be empty.")).nonempty("The product must have at least one tag."),
   variants: z.array(VariantZodSchema).nonempty("The product must have at least one variant."),
   inventory: InventoryZodSchema,
+  isDeleted: z.boolean().optional()
 });
 
 // Export the Zod schemas

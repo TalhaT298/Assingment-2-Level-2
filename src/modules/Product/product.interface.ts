@@ -16,5 +16,6 @@ export type TVariant = {
     tags: string[];
     variants: TVariant[];
     inventory: TInventory;
+    isDeleted?: boolean;
   };
   
