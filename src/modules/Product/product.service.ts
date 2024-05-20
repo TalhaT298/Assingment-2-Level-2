@@ -17,7 +17,7 @@ const getSingleProductFromDB = async (id: string) => {
 };
 
 const updateProductInDB = async (productId: string, productData: TProduct) => {
-  const product = await ProductModel.findByIdAndUpdate(productId, productData);
+  const product = await ProductModel.findByIdAndUpdate(productId, productData,{new:true});
   if (!product) {
     throw new Error("Product not found");
   }
