@@ -100,7 +100,7 @@ const deleteProduct = async (req: Request, res: Response) => {
 
     res.status(200).json({
       succuess: true,
-      message: "Product updated sucessfully",
+      message: "Product delete sucessfully",
       data: result,
     });
   } catch (err : any) {
