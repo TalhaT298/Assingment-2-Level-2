@@ -22,7 +22,7 @@ const createOrder = async (req: Request, res: Response) => {
     if (zodParsedData.quantity > product.inventory.quantity) {
       return res.status(400).json({
         success: false,
-        message: "Requested quantity exceeds available stock",
+        message: "Requested quantity exceeds",
       });
     }
 
@@ -56,7 +56,7 @@ const getAllOrders = async (req: Request, res: Response) => {
     let message = '';
     if (email) {
       message = result.length !== 0
-        ? `Orders fetched successfully for user email!`
+        ? `Orders fetched successfully for email!`
         : `No orders found for email: ${email}`;
     } else {
       message = result.length !== 0
