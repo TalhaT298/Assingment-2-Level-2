@@ -3,7 +3,6 @@ import cors from "cors";
 import { OrderRoutes } from "./modules/order/order.route";
 import { ProductRoutes } from "./modules/product/product.route";
 
-
 const app: Application = express();
 
 app.use(express.json());
@@ -20,7 +19,7 @@ app.get("/", (req: Request, res: Response) => {
 app.use((req: Request, res: Response) => {
   res.status(404).json({
     success: false,
-    message: "Not Founde Route",
+    message: "Route Not Founde",
   });
 });
 
