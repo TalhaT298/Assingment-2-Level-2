@@ -20,7 +20,7 @@ const createProduct = async (req: Request, res: Response) => {
     res.status(500).json({
       success: false,
       message: "A problem has occurred",
-      error: err,
+      error: err instanceof Error ? err.message : "Unknown error",
     });
   }
 };
@@ -42,9 +42,9 @@ const getAllProducts = async (req: Request, res: Response) => {
     });
   } catch (err) {
     res.status(500).json({
-      succuess: false,
+      success: false,
       message: "A problem has occurred",
-      error: err,
+      error: err instanceof Error ? err.message : "Unknown error",
     });
   }
 };
@@ -63,7 +63,7 @@ const getSingleProduct = async (req: Request, res: Response) => {
     res.status(500).json({
       succuess: false,
       message: "A problem has occurred",
-      error: err,
+      error: err instanceof Error ? err.message : "Unknown error",
     });
   }
 };
@@ -85,11 +85,11 @@ const updateProduct = async (req: Request, res: Response) => {
       message: "Product updated successfully!",
       data: result,
     });
-  } catch (err: any) {
+  } catch (err) {
     res.status(500).json({
       succuess: false,
       message: "Something went wrong",
-      error: err.message || err,
+      error: err instanceof Error ? err.message : "Unknown error",
     });
   }
 };
@@ -109,7 +109,7 @@ const deleteProduct = async (req: Request, res: Response) => {
     res.status(500).json({
       succuess: false,
       message: "Something went wrong",
-      error: err,
+      error: err instanceof Error ? err.message : "Unknown error",
     });
   }
 };

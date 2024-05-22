@@ -1,13 +1,20 @@
 import { QueryParams, TProduct } from "./product.interface";
 import { ProductModel } from "./product.model";
 
+type SearchCriteria = {
+  name?: { $regex: string; $options: string };
+  category?: { $regex: string; $options: string };
+  description?: { $regex: string; $options: string };
+};
+
 const createProductIntoDB = async (product: TProduct) => {
   const result = await ProductModel.create(product);
   return result;
 };
+
 const getAllProductFromDB = async (query: QueryParams) => {
   try {
-    const searchCriteria: { [key: string]: any } = {};
+    const searchCriteria: SearchCriteria = {};
 
     if (query.name) {
       searchCriteria.name = { $regex: query.name, $options: "i" };
@@ -20,13 +27,18 @@ const getAllProductFromDB = async (query: QueryParams) => {
     if (query.description) {
       searchCriteria.description = { $regex: query.description, $options: "i" };
     }
-    const products = await ProductModel.find(searchCriteria);
 
+    const products = await ProductModel.find(searchCriteria);
     return products;
-  } catch (error: any) {
-    throw new Error(error);
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    } else {
+      throw new Error("An unknown error occurred");
+    }
   }
 };
+
 const getSingleProductFromDB = async (id: string) => {
   const result = await ProductModel.findById(id);
   return result;
@@ -52,6 +64,5 @@ export const ProductServices = {
   getAllProductFromDB,
   getSingleProductFromDB,
   deleteProductFromDB,
-  updateProductIntoDB
-  
+  updateProductIntoDB,
 };
