@@ -2,10 +2,10 @@ import { z } from "zod";
 
 
 const OrderZodSchema = z.object({
-  email: z.string().email("Invalid email format"),
+  email: z.string().email("The email address entered is not valid"),
   productId: z.string(),
-  price: z.number().positive("Price must be a positive number."),
-  quantity: z.number().positive().int("Quantity must be a positive integer."),
+  price: z.number().positive("Please enter a positive value for the price"),
+  quantity: z.number().positive().int("Please enter a positive integer for the quantity."),
 });
 
 export default OrderZodSchema;

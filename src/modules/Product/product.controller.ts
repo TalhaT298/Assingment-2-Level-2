@@ -37,7 +37,7 @@ const getAllProducts = async (req: Request, res: Response) => {
       success: true,
       message: isQueryEmpty
         ? "Products fetched successfully!"
-        : `Products matching search term' ${Object.values(query)}' fetched successfully!`,
+        : `Products matching search term' ${Object.values(query)}'fetched successfully!`,
       data: result,
     });
   } catch (err) {

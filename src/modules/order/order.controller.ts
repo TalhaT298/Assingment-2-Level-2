@@ -56,8 +56,8 @@ const getAllOrders = async (req: Request, res: Response) => {
     let message = '';
     if (email) {
       message = result.length !== 0
-        ? `Orders fetched successfully for email!`
-        : `No orders found for email: ${email}`;
+        ? `Successfully fetched orders associated with this email`
+        : `No orders found for this email: ${email}`;
     } else {
       message = result.length !== 0
         ? "Orders fetched successfully!"
