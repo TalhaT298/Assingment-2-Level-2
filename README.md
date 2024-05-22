@@ -14,20 +14,21 @@ Make sure you have the following installed on your local machine:
 
 1. **Clone the repository**
 
-   ```bash
-   git clone <https://github.com/TalhaT298/Assingment-2-Level-2>
+   ```
+   git clone https://github.com/TalhaT298/Assingment-2-Level-2
+
+   ```
    cd <repository-directory>
 
 2. **Install dependencies**
 
-```bash
-Copy code
+```
 npm install
+
+```
 Set up environment variables
 
 Create a .env file in the root directory of your project and add the following variables:
 
-env
-Copy code
 PORT=5000
 DATABASE_URL=mongodb://localhost:27017/your-database-name
