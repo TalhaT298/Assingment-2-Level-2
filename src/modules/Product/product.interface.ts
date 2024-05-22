@@ -1,21 +1,21 @@
-export type TVariant = {
+export type ProductVariant = {
   type: string;
   value: string;
 };
 
-export type TInventory = {
+export type ProductInventory = {
   quantity: number;
   inStock: boolean;
 };
 
-export type TProduct = {
+export type PProduct = {
   name: string;
   description: string;
   price: number;
   category: string;
   tags: string[];
-  variants: TVariant[];
-  inventory: TInventory;
+  variants: ProductVariant[];
+  inventory: ProductInventory;
   isDeleted?: boolean;
 };
 

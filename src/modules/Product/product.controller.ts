@@ -1,15 +1,15 @@
 import { Request, Response } from "express";
 import { ProductServices } from "./product.service";
-import { TProduct } from "./product.interface";
+import { PProduct } from "./product.interface";
 import ProductZodSchema from "./product.validation";
 
 const createProduct = async (req: Request, res: Response) => {
   try {
-    const productData: TProduct = req.body;
+    const productData: PProduct = req.body;
 
     const zodParsedData = ProductZodSchema.parse(productData);
 
-    const result = await ProductServices.createProductIntoDB(zodParsedData);
+    const result = await ProductServices.createProductIntoDataBase(zodParsedData);
 
     res.status(200).json({
       success: true,
@@ -29,7 +29,7 @@ const getAllProducts = async (req: Request, res: Response) => {
   try {
     const { query } = req;
 
-    const result = await ProductServices.getAllProductFromDB(query);
+    const result = await ProductServices.getAllProductFromDataBase(query);
 
     const isQueryEmpty = Object.keys(query).length === 0;
 
@@ -52,7 +52,7 @@ const getAllProducts = async (req: Request, res: Response) => {
 const getSingleProduct = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
-    const result = await ProductServices.getSingleProductFromDB(productId);
+    const result = await ProductServices.getSingleProductFromDataBase(productId);
 
     res.status(200).json({
       succuess: true,
@@ -75,7 +75,7 @@ const updateProduct = async (req: Request, res: Response) => {
 
     const zodParsedData = ProductZodSchema.parse(productData);
 
-    const result = await ProductServices.updateProductIntoDB(
+    const result = await ProductServices.updateProductIntoDataBase(
       productId,
       zodParsedData,
     );
@@ -98,7 +98,7 @@ const deleteProduct = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
 
-    const result = await ProductServices.deleteProductFromDB(productId);
+    const result = await ProductServices.deleteProductFromDataBase(productId);
 
     res.status(200).json({
       succuess: true,

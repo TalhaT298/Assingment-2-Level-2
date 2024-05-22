@@ -1,13 +1,13 @@
-import { QueryParams, TProduct } from "./product.interface";
+import { QueryParams, PProduct } from "./product.interface";
 import { ProductModel } from "./product.model";
 
 
-const createProductIntoDB = async (product: TProduct) => {
+const createProductIntoDataBase = async (product: PProduct) => {
   const result = await ProductModel.create(product);
   return result;
 };
 
-const getAllProductFromDB = async (query: QueryParams) => {
+const getAllProductFromDataBase = async (query: QueryParams) => {
   try {
     const searchCriteria:{ [key: string]: any } = {};
 
@@ -30,17 +30,17 @@ const getAllProductFromDB = async (query: QueryParams) => {
   }
 };
 
-const getSingleProductFromDB = async (id: string) => {
+const getSingleProductFromDataBase = async (id: string) => {
   const result = await ProductModel.findById(id);
   return result;
 };
 
-const deleteProductFromDB = async (id: string) => {
+const deleteProductFromDataBase = async (id: string) => {
   const result = await ProductModel.deleteOne({ _id: id });
   return result;
 };
 
-const updateProductIntoDB = async (productId: string, productData: TProduct) => {
+const updateProductIntoDataBase = async (productId: string, productData: PProduct) => {
   const product = await ProductModel.findByIdAndUpdate(productId, productData, {
     new: true,
   });
@@ -51,9 +51,9 @@ const updateProductIntoDB = async (productId: string, productData: TProduct) => 
 };
 
 export const ProductServices = {
-  createProductIntoDB,
-  getAllProductFromDB,
-  getSingleProductFromDB,
-  deleteProductFromDB,
-  updateProductIntoDB,
+  createProductIntoDataBase,
+  getAllProductFromDataBase,
+  getSingleProductFromDataBase,
+  deleteProductFromDataBase,
+  updateProductIntoDataBase,
 };

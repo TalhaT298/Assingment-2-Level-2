@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
-import { TOrder } from "./order.interface";
+import { ProductOrder } from "./order.interface";
 import { OrderServices } from "./order.service";
 import OrderZodSchema from "./order.validation";
 import { ProductModel } from "../product/product.model";
 
 const createOrder = async (req: Request, res: Response) => {
   try {
-    const orderData: TOrder = req.body;
+    const orderData: ProductOrder = req.body;
 
     const zodParsedData = OrderZodSchema.parse(orderData);
 
@@ -32,7 +32,7 @@ const createOrder = async (req: Request, res: Response) => {
 
     await product.save();
 
-    const result = await OrderServices.createOrderIntoDB(zodParsedData);
+    const result = await OrderServices.createOrderIntoDataBase(zodParsedData);
 
     return res.status(200).json({
       success: true,
@@ -51,7 +51,7 @@ const createOrder = async (req: Request, res: Response) => {
 const getAllOrders = async (req: Request, res: Response) => {
   try {
     const email = req.query.email as string | undefined;
-    const result = await OrderServices.getAllOrdersFromDB(email);
+    const result = await OrderServices.getAllOrdersFromDataBase(email);
 
     let message = '';
     if (email) {

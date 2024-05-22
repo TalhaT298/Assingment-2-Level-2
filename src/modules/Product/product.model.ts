@@ -1,7 +1,7 @@
 import { Schema, model } from "mongoose";
-import { TInventory, TProduct, TVariant } from "./product.interface";
+import { ProductInventory, PProduct, ProductVariant } from "./product.interface";
 
-const SchemaVariant: Schema<TVariant> = new Schema<TVariant>(
+const SchemaVariant: Schema<ProductVariant> = new Schema<ProductVariant>(
   {
     type: { type: String, required: true },
     value: { type: String, required: true },
@@ -9,7 +9,7 @@ const SchemaVariant: Schema<TVariant> = new Schema<TVariant>(
   { _id: false },
 );
 
-const SchemaInventory: Schema<TInventory> = new Schema<TInventory>(
+const SchemaInventory: Schema<ProductInventory> = new Schema<ProductInventory>(
   {
     quantity: { type: Number, required: true },
     inStock: { type: Boolean, required: true },
@@ -17,7 +17,7 @@ const SchemaInventory: Schema<TInventory> = new Schema<TInventory>(
   { _id: false },
 );
 
-const ProductSchema: Schema<TProduct> = new Schema<TProduct>({
+const ProductSchema: Schema<PProduct> = new Schema<PProduct>({
   name: { type: String, required: true },
   description: { type: String, required: true },
   price: { type: Number, required: true },
@@ -48,4 +48,4 @@ ProductSchema.pre("aggregate", function (next) {
   next();
 });
 
-export const ProductModel = model<TProduct>("Product", ProductSchema);
+export const ProductModel = model<PProduct>("Product", ProductSchema);
