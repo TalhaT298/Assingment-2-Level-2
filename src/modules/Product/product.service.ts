@@ -1,11 +1,6 @@
 import { QueryParams, TProduct } from "./product.interface";
 import { ProductModel } from "./product.model";
 
-type SearchCriteria = {
-  name?: { $regex: string; $options: string };
-  category?: { $regex: string; $options: string };
-  description?: { $regex: string; $options: string };
-};
 
 const createProductIntoDB = async (product: TProduct) => {
   const result = await ProductModel.create(product);
@@ -14,7 +9,7 @@ const createProductIntoDB = async (product: TProduct) => {
 
 const getAllProductFromDB = async (query: QueryParams) => {
   try {
-    const searchCriteria: SearchCriteria = {};
+    const searchCriteria:{ [key: string]: any } = {};
 
     if (query.name) {
       searchCriteria.name = { $regex: query.name, $options: "i" };
@@ -30,12 +25,8 @@ const getAllProductFromDB = async (query: QueryParams) => {
 
     const products = await ProductModel.find(searchCriteria);
     return products;
-  } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(error.message);
-    } else {
-      throw new Error("An unknown error occurred");
-    }
+  } catch (error: any) {
+    throw new Error(error);
   }
 };
 

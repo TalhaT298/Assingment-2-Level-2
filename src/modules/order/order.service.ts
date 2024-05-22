@@ -11,12 +11,8 @@ const getAllOrdersFromDB = async (email?: string) => {
     const query = email ? { email } : {};
     const orders = await OrderModel.find(query);
     return orders;
-  } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(error.message);
-    } else {
-      throw new Error("An unknown error occurred");
-    }
+  } catch (error: any) {
+    throw new Error(error);
   }
 };
 

@@ -39,11 +39,11 @@ const createOrder = async (req: Request, res: Response) => {
       message: "Order has been successfully created",
       data: result,
     });
-  } catch (error) {
+  } catch (error: any) {
     return res.status(500).json({
       success: false,
       message: "An error has occurred",
-      error: error instanceof Error ? error.message : "Unknown error",
+      error: error,
     });
   }
 };
@@ -73,7 +73,7 @@ const getAllOrders = async (req: Request, res: Response) => {
     res.status(500).json({
       succuess: false,
       message: "An error has occurred",
-      error: err instanceof Error ? err.message : "Unknown error",
+      error: err,
     });
   }
 };
