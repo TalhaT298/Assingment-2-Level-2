@@ -3,27 +3,23 @@ import { ProductServices } from "./product.service";
 import { TProduct } from "./product.interface";
 import ProductZodSchema from "./product.validation";
 
-// Define the createProduct function with proper typing
 const createProduct = async (req: Request, res: Response) => {
   try {
     const productData: TProduct = req.body;
 
-    // Data validation using Zod
     const zodParsedData = ProductZodSchema.parse(productData);
 
-    // Call the service function to send this data
     const result = await ProductServices.createProductIntoDB(zodParsedData);
 
-    // Send response
     res.status(200).json({
       success: true,
-      message: "Product is created successfully",
+      message: "The product has been successfully created",
       data: result,
     });
   } catch (err) {
     res.status(500).json({
       success: false,
-      message: "Something went wrong",
+      message: "A problem has occurred",
       error: err,
     });
   }
@@ -31,17 +27,23 @@ const createProduct = async (req: Request, res: Response) => {
 
 const getAllProducts = async (req: Request, res: Response) => {
   try {
-    const result = await ProductServices.getAllProductFromDB();
+    const { query } = req;
+
+    const result = await ProductServices.getAllProductFromDB(query);
+
+    const isQueryEmpty = Object.keys(query).length === 0;
 
     res.status(200).json({
-      succuess: true,
-      message: "Products are retrieve sucessfully",
+      success: true,
+      message: isQueryEmpty
+        ? "Successfully fetched the products"
+        : `Products that match the search term'${Object.values(query)}' were fetched successfully!`,
       data: result,
     });
   } catch (err) {
     res.status(500).json({
       succuess: false,
-      message: "Something went wrong",
+      message: "A problem has occurred",
       error: err,
     });
   }
@@ -60,7 +62,7 @@ const getSingleProduct = async (req: Request, res: Response) => {
   } catch (err) {
     res.status(500).json({
       succuess: false,
-      message: "Something went wrong",
+      message: "A problem has occurred",
       error: err,
     });
   }
@@ -73,17 +75,17 @@ const updateProduct = async (req: Request, res: Response) => {
 
     const zodParsedData = ProductZodSchema.parse(productData);
 
-    const result = await ProductServices.updateProductInDB(
+    const result = await ProductServices.updateProductIntoDB(
       productId,
-      zodParsedData
+      zodParsedData,
     );
 
     res.status(200).json({
       succuess: true,
-      message: "Product updated sucessfully",
+      message: "Product updated successfully!",
       data: result,
     });
-  } catch (err : any) {
+  } catch (err: any) {
     res.status(500).json({
       succuess: false,
       message: "Something went wrong",
@@ -91,23 +93,23 @@ const updateProduct = async (req: Request, res: Response) => {
     });
   }
 };
+
 const deleteProduct = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
 
-
-    const result = await ProductServices.deleteProduct(productId);
+    const result = await ProductServices.deleteProductFromDB(productId);
 
     res.status(200).json({
       succuess: true,
-      message: "Product delete sucessfully",
+      message: "Product deleted successfully!",
       data: result,
     });
-  } catch (err : any) {
+  } catch (err) {
     res.status(500).json({
       succuess: false,
       message: "Something went wrong",
-      error: err.message || err,
+      error: err,
     });
   }
 };
@@ -117,5 +119,5 @@ export const ProductControllers = {
   getAllProducts,
   getSingleProduct,
   updateProduct,
-  deleteProduct
+  deleteProduct,
 };

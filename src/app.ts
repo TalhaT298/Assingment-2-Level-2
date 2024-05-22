@@ -1,24 +1,27 @@
 import express, { Application, Request, Response } from "express";
 import cors from "cors";
-import { ProductRoutes } from "./modules/Product/product.route";
+import { OrderRoutes } from "./modules/order/order.route";
+import { ProductRoutes } from "./modules/product/product.route";
+
 
 const app: Application = express();
 
-// parser
 app.use(express.json());
 app.use(cors());
 
+app.use("/api/products", ProductRoutes);
+app.use("/api/orders", OrderRoutes);
 
-// applications routes 
-app.use('/api/products',ProductRoutes)
-app.use('/api/products',ProductRoutes)
-
-
-
-// testing server 
 app.get("/", (req: Request, res: Response) => {
   const a = "Hello World";
   res.send(a);
+});
+
+app.use((req: Request, res: Response) => {
+  res.status(404).json({
+    success: false,
+    message: "Not Founde Route",
+  });
 });
 
 export default app;
