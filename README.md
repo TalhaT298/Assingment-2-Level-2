@@ -1,4 +1,4 @@
-# Assignment 2 Level 2
+# product-order-crud
 
 This is a Node.js application built with TypeScript, Express, and MongoDB. It provides an API for managing products and orders. The application includes functionalities such as creating, retrieving, updating, and deleting products, as well as creating and retrieving orders.
 
