@@ -15,14 +15,14 @@ const createOrder = async (req: Request, res: Response) => {
     if (!product) {
       return res.status(404).json({
         success: false,
-        message: "The Product not found",
+        message: "Product not found",
       });
     }
 
     if (zodParsedData.quantity > product.inventory.quantity) {
       return res.status(400).json({
         success: false,
-        message: "Not enough stock for the requested quantity",
+        message: "Requested quantity exceeds available stock",
       });
     }
 
@@ -36,13 +36,13 @@ const createOrder = async (req: Request, res: Response) => {
 
     return res.status(200).json({
       success: true,
-      message: "Order has been successfully created",
+      message: "Order created successfully!",
       data: result,
     });
   } catch (error: any) {
     return res.status(500).json({
       success: false,
-      message: "An error has occurred",
+      message: "Something went wrong",
       error: error,
     });
   }
@@ -56,11 +56,11 @@ const getAllOrders = async (req: Request, res: Response) => {
     let message = '';
     if (email) {
       message = result.length !== 0
-        ? `Successfully fetched the user's email orders!`
+        ? `Orders fetched successfully for user email!`
         : `No orders found for email: ${email}`;
     } else {
       message = result.length !== 0
-        ? "Successfully fetched orders!"
+        ? "Orders fetched successfully!"
         : "No orders found.";
     }
 
@@ -72,7 +72,7 @@ const getAllOrders = async (req: Request, res: Response) => {
   } catch (err) {
     res.status(500).json({
       succuess: false,
-      message: "An error has occurred",
+      message: "Something went wrong",
       error: err,
     });
   }

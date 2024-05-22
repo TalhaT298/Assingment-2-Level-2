@@ -13,13 +13,13 @@ const createProduct = async (req: Request, res: Response) => {
 
     res.status(200).json({
       success: true,
-      message: "The product has been successfully created",
+      message: "Product created successfully!",
       data: result,
     });
   } catch (err) {
     res.status(500).json({
       success: false,
-      message: "A problem has occurred",
+      message: "Something went wrong",
       error: err,
     });
   }
@@ -36,14 +36,14 @@ const getAllProducts = async (req: Request, res: Response) => {
     res.status(200).json({
       success: true,
       message: isQueryEmpty
-        ? "Successfully fetched the products"
-        : `Products that match the search term'${Object.values(query)}' were fetched successfully!`,
+        ? "Products fetched successfully!"
+        : `Products matching search term' ${Object.values(query)}' fetched successfully!`,
       data: result,
     });
   } catch (err) {
     res.status(500).json({
       succuess: false,
-      message: "A problem has occurred",
+      message: "Something went wrong",
       error: err,
     });
   }
@@ -56,13 +56,13 @@ const getSingleProduct = async (req: Request, res: Response) => {
 
     res.status(200).json({
       succuess: true,
-      message: "Product is retrieve sucessfully",
+      message: "Product is retrieve sucessfully!",
       data: result,
     });
   } catch (err) {
     res.status(500).json({
       succuess: false,
-      message: "A problem has occurred",
+      message: "Something went wrong",
       error: err,
     });
   }
