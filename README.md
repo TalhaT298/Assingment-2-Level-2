@@ -18,7 +18,7 @@ Make sure you have the following installed on your local machine:
    git clone https://github.com/TalhaT298/Assingment-2-Level-2
 
    ```
-   cd <repository-directory>
+   cd repository-directory
 
 2. **Install dependencies**
 
